@@ -5,8 +5,14 @@
     <body>
         <%- include("./partials/nav.ejs")%>
 
-        <% if (scores.length > 0) { %>
+        <form action="/search" method="GET">
+            <input type="text" name="projectName" placeholder="Project Name">
+            <button type="submit">Search</button>
+        </form>
+
+        <% if (scores && scores.length > 0) { %>
             <% scores.forEach(temp => { %>
+
 
                 <a href="/score/<%= temp._id %>">
                     <h2><%= temp.projectName %></h2>

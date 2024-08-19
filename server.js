@@ -45,6 +45,15 @@ app.get("/score/:id", (req, res) => {
         })
 })
 
+app.get("/search", (req, res) => {
+    const searchString = req.query.projectName;
+    console.log(searchString);
+
+    Score.find({ projectName: searchString }).exec()
+        .then(result => res.render("score", { scores: result }))
+        .catch(err => console.log(err));
+})
+
 app.delete("/score/:id", (req, res) => {
     const UID = req.params.id;
 
