@@ -1,0 +1,30 @@
+<html>
+    <head>
+        <%- include("./partials/header.ejs")%>
+    </head>
+    <body>
+        <%- include("./partials/nav.ejs")%>
+
+        <div class="displayScore">
+            <h2>Project Name: <%= temp.projectName %></h2>
+            <p>Score: <%= temp.score %></p>
+            <p> Description: <br><%= temp.description %></p>
+            <button class="delete" data-doc="<%= temp._id %>">delete</button>
+        </div>
+
+        <script>
+            const deleteCall = document.querySelector("button.delete");
+
+            const endpoint = `/score/${deleteCall.dataset.doc}`
+            console.log(endpoint);
+            deleteCall.addEventListener("click", (e) => {
+                fetch((endpoint), {
+                    method: "DELETE"
+                })
+                .then((response) => response.json())
+                .then((data) => window.location.href = data.redirect)
+                .catch((err) => console.log(err));
+            })
+        </script>
+    </body>
+</html>

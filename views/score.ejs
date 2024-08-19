@@ -1,0 +1,26 @@
+<html>
+    <head>
+        <%- include("./partials/header.ejs")%>
+    </head>
+    <body>
+        <%- include("./partials/nav.ejs")%>
+
+        <% if (scores.length > 0) { %>
+            <% scores.forEach(temp => { %>
+
+                <a href="/score/<%= temp._id %>">
+                    <h2><%= temp.projectName %></h2>
+                </a>
+                <h3><%= temp.score %></h3>
+                <h3><%= temp.description %></h3>
+
+            <% }) %>
+        <% } else { %>
+
+            <h2>No score to display</h2>
+            <p>Click <a href="/create">here</a> to add a sore</p>
+
+        <% } %>
+
+    </body>
+</html>

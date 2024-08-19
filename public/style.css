@@ -1,0 +1,18 @@
+nav{
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 60px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #ddd;
+    text-transform: uppercase;
+  }
+
+.displayScore {
+    position: relative;
+}
+
+.delete {
+    position: absolute;
+    top: 50%;
+    right: 0%;
+}
