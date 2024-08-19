@@ -1,6 +1,6 @@
 const express = require("express");
 const mongoose = require("mongoose");
-const Score = require("./models/models");
+const scoreController = require("./controller/scoreController")
 const { render } = require("ejs");
 
 const dbURI = "mongodb+srv://fedrium:mongodbpass123@node.y5rel.mongodb.net/score-db";
@@ -13,71 +13,16 @@ app.use(express.static("public"));
 
 app.set("view engine", "ejs");
 
-app.get("/", (req, res) => {
-    Score.find()
-        .then(result => {
-            res.render("score", { scores: result });
-        })
-        .catch(err => {
-            console.log(err);
-        })
-})
-
-app.get("/score", (req, res) => {
-    Score.find()
-        .then(result => {
-            res.render("score", { scores: result });
-        })
-        .catch(err => {
-            console.log(err);
-        })
-})
-
-app.get("/score/:id", (req, res) => {
-    const UID = req.params.id;
-
-    Score.findById(UID)
-        .then((result) => {
-            res.render("detail", { temp: result });
-        })
-        .catch((err) => {
-            console.log(err);
-        })
-})
-
-app.get("/search", (req, res) => {
-    const searchString = req.query.projectName;
-    console.log(searchString);
-
-    Score.find({ projectName: searchString }).exec()
-        .then(result => res.render("score", { scores: result }))
-        .catch(err => console.log(err));
-})
-
-app.delete("/score/:id", (req, res) => {
-    const UID = req.params.id;
-
-    Score.findByIdAndDelete(UID)
-        .then(result => {
-            res.json({ redirect: "/score"});
-        })
-})
+app.get("/", scoreController.score_index);
+app.get("/score", scoreController.score_index);
+app.get("/score/:id", scoreController.score_detail);
+app.get("/search", scoreController.score_search);
+app.delete("/score/:id", scoreController.score_delete);
+app.post("/score", scoreController.score_create);
 
 app.get("/create", (req, res) => {
     res.render("create");
-})
-
-app.post("/score", (req, res) => {
-    const score = new Score(req.body);
-
-    score.save()
-        .then(result => {
-            res.redirect("./score");
-        })
-        .catch((err) => {
-            console.log(err);
-        })
-})
+});
 
 app.use((req, res) => {
     res.status(404).render("404");

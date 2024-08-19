@@ -16,6 +16,6 @@ const scoreSchema = new Schema ({
     },
 })
 
-scoreSchema.index({'$projectName': 'text'});
+scoreSchema.index({'projectName': 'text', 'score': 'number', 'description': 'test'});
 const Score = mongoose.model("Score", scoreSchema);
 module.exports = Score;
