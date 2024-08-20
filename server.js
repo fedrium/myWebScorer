@@ -1,10 +1,13 @@
 const express = require("express");
 const mongoose = require("mongoose");
+const dotenv = require("dotenv");
 const scoreController = require("./controller/scoreController")
 const { render } = require("ejs");
 const Score = require("./models/models");
 
-const dbURI = "mongodb+srv://fedrium:mongodbpass123@node.y5rel.mongodb.net/score-db";
+dotenv.config();
+
+const dbURI = process.env.DBURL;
 mongoose.connect(dbURI)
     .then((result) => {
         app.listen(3000);
@@ -30,7 +33,6 @@ app.get("/create", (req, res) => {
 
 app.get("/update/:projectName", (req, res) => {
     const pN = req.params.projectName;
-    console.log(pN);
     res.render("update", { projectName: pN});
 })
 
