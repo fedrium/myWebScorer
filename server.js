@@ -2,10 +2,14 @@ const express = require("express");
 const mongoose = require("mongoose");
 const scoreController = require("./controller/scoreController")
 const { render } = require("ejs");
+const Score = require("./models/models");
 
 const dbURI = "mongodb+srv://fedrium:mongodbpass123@node.y5rel.mongodb.net/score-db";
 mongoose.connect(dbURI)
-    .then((result) => app.listen(3000));
+    .then((result) => {
+        app.listen(3000);
+        console.log("Connected to DB");
+    })
 
 const app = express();
 app.use(express.urlencoded({ extended: true }));
@@ -23,6 +27,14 @@ app.post("/score", scoreController.score_create);
 app.get("/create", (req, res) => {
     res.render("create");
 });
+
+app.get("/update/:projectName", (req, res) => {
+    const pN = req.params.projectName;
+    console.log(pN);
+    res.render("update", { projectName: pN});
+})
+
+app.post("/update" , scoreController.score_update);
 
 app.use((req, res) => {
     res.status(404).render("404");

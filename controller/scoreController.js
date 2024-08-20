@@ -56,11 +56,25 @@ const score_create = (req, res) => {
         })
 }
 
+const score_update = (req, res) => {
+    console.log(req.body);
+
+    const filter = { projectName: req.body.projectName };
+    const update = { score: req.body.score, description: req.body.description };
+    Score.findOneAndUpdate(filter, update)
+        .then(result => {
+            Score.find()
+                .then(result => {
+                        res.render("score", { scores: result });
+                })
+        })
+}
 
 module.exports = {
     score_index,
     score_detail,
     score_search,
     score_delete,
-    score_create
+    score_create,
+    score_update
 }

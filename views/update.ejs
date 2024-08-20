@@ -5,13 +5,13 @@
     <body>
         <%- include("./partials/nav.ejs")%>
 
-        <div class="createScore">
-            <form action="/score" method="POST">
-                <label for="projectname">Project name:</label>
-                <input type="text" id="pname" required name="projectName"><br><br>
-                <label for="score">Score:</label>
+        <div class="updateScore">
+            <form action="/update" method="POST">
+                <label for="projectName">Project Name:</label>
+                <input type="text" id="projectName" name="projectName" value="<%= projectName %>" readonly><br><br>
+                <label for="score">New score:</label>
                 <input type="number" id="score" required name="score"><br><br>
-                <label for="description">Description:</label>
+                <label for="description">New description:</label>
                 <input type="text" id="desc" required name="description"><br><br>
                 <button>Submit</button>
             </form>

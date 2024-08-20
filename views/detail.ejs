@@ -10,6 +10,7 @@
             <p>Score: <%= temp.score %></p>
             <p> Description: <br><%= temp.description %></p>
             <button class="delete" data-doc="<%= temp._id %>">delete</button>
+            <a href="/update/<%= temp.projectName %>" class="button">edit</a>
         </div>
 
         <script>
