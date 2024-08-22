@@ -28,7 +28,7 @@ app.delete("/score/:id", scoreController.score_delete);
 app.post("/score", scoreController.score_create);
 
 app.get("/create", (req, res) => {
-    res.render("create");
+    res.render("create", { error: null });
 });
 
 app.get("/update/:projectName", (req, res) => {

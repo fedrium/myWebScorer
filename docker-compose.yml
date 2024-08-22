@@ -9,7 +9,7 @@ services:
     volumes:
       - mongodb_data:/data/db
 
-  nodeapp:
+  nodejs:
     image: node:alpine
     container_name: nodeapp
     working_dir: /usr/src/app
@@ -19,8 +19,6 @@ services:
       - "3000:3000"
     depends_on:
       - mongodb
-    environment:
-      - MONGODB_URI=mongodb://mongodb:27017/score-db
     command: npm start
 
 volumes:

@@ -5,6 +5,12 @@
     <body>
         <%- include("./partials/nav.ejs")%>
 
+        <% if (error) { %>
+            <div class="alert">
+              <%= error %>
+            </div>
+        <% } %>
+
         <div class="createScore">
             <form action="/score" method="POST">
                 <label for="projectname">Project name:</label>
@@ -12,7 +18,7 @@
                 <label for="score">Score:</label>
                 <input type="number" id="score" required name="score"><br><br>
                 <label for="description">Description:</label>
-                <input type="text" id="desc" required name="description"><br><br>
+                <textarea type="text" id="desc" required name="description"></textarea><br><br>
                 <button>Submit</button>
             </form>
         </div>

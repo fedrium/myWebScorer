@@ -25,3 +25,10 @@ a.button {
     background-color: buttonface;
     text-decoration: none;
 }
+
+.alert {
+    padding: 10px;
+    background-color: #f44336;
+    color: black;
+    margin-bottom: 10px;
+  }

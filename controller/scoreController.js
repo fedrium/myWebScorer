@@ -47,13 +47,20 @@ const score_delete = (req, res) => {
 const score_create = (req, res) => {
     const score = new Score(req.body);
 
-    score.save()
-        .then(result => {
-            res.redirect("./score");
-        })
-        .catch((err) => {
-            console.log(err);
-        })
+    console.log(req.body.description);
+    if((req.body.description.length>0 && req.body.description.replace(/\s/g, '').length==0) || (req.body.projectName.length>0 && req.body.projectName.replace(/\s/g, '').length==0))
+    {
+        res.render("create", { error: "Invalid Input" });
+    }
+    else {
+        score.save()
+            .then(result => {
+                res.redirect("./score");
+            })
+            .catch((err) => {
+                console.log(err);
+            })
+        }
 }
 
 const score_update = (req, res) => {
